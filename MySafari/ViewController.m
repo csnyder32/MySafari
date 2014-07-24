@@ -16,22 +16,23 @@
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet UIButton *forwardButton;
 - (void)updateButtons;
-@property (weak, nonatomic) IBOutlet UIButton *clearURL;
+
 
 
 @end
 
 @implementation ViewController
-- (IBAction)clearUrlText:(id)sender {
-   
-
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.myWebView.scrollView.delegate = self;
 
+}
+-(void)webViewDidFinishLoad:(UIWebView *)webView{
+    NSURLRequest *currentRequest = [webView request];
+    NSURL *currentURL = [currentRequest URL];
+    self.myURLTextField.text = currentURL.absoluteString;
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {

@@ -24,7 +24,7 @@
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="hyy-3v-5lm"/>
                                 </connections>
                             </webView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="type your web address here" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WMt-vl-VwR">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="type your web address here" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="WMt-vl-VwR">
                                 <rect key="frame" x="20" y="30" width="286" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -89,17 +89,6 @@
                                             <action selector="comingSoon:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="aWy-DA-M7b"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MUf-UF-TzE">
-                                        <rect key="frame" x="10" y="55" width="91" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <state key="normal" title="Clear the URL">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="clearUrlText:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Qvx-p4-lo7"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -108,7 +97,6 @@
                     </view>
                     <connections>
                         <outlet property="backButton" destination="jms-Pj-p0O" id="DbP-Gq-1H3"/>
-                        <outlet property="clearURL" destination="MUf-UF-TzE" id="qGU-kt-YU1"/>
                         <outlet property="forwardButton" destination="ufq-hb-X6i" id="dp4-Z8-Dgx"/>
                         <outlet property="myURLTextField" destination="WMt-vl-VwR" id="0ay-bU-fUA"/>
                         <outlet property="myWebView" destination="e6Z-fx-gc0" id="XJT-C4-nVT"/>
