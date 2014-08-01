@@ -12,6 +12,7 @@
 @interface ViewController ()<UIWebViewDelegate, UITextFieldDelegate, UIScrollViewAccessibilityDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *myWebView;
 @property (weak, nonatomic) IBOutlet UITextField *myURLTextField;
+@property(weak, nonatomic)NSURL *url;
 
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet UIButton *forwardButton;
@@ -27,9 +28,31 @@
 {
     [super viewDidLoad];
     self.myWebView.scrollView.delegate = self;
+    self.backButton.enabled = NO;
+    self.backButton.alpha = .5;
+
+    self.forwardButton.enabled = NO;
+    self.forwardButton.alpha = .5;
 
 }
--(void)webViewDidFinishLoad:(UIWebView *)webView{
+-(void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    if ([self.myWebView canGoBack]) {
+        self.backButton.enabled = YES;
+        self.backButton.alpha = 1;
+    } else {
+        self.backButton.enabled = NO;
+        self.backButton.alpha = .5;
+    }
+
+    if ([self.myWebView canGoForward]) {
+        self.forwardButton.enabled = YES;
+        self.forwardButton.alpha = 1;
+    } else {
+        self.forwardButton.enabled = NO;
+        self.forwardButton.alpha = .5;
+    }
+
     NSURLRequest *currentRequest = [webView request];
     NSURL *currentURL = [currentRequest URL];
     self.myURLTextField.text = currentURL.absoluteString;
@@ -43,7 +66,23 @@
 - (IBAction)onForwardButtonPressed:(id)sender {
     [self.myWebView goForward];
 
+}
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+    {
+        NSString *urlString = textField.text;
+        NSString *formattedUrlString = @"";
+        if ([urlString hasPrefix:@"http://"]) {
+            formattedUrlString = urlString;
+        } else {
+            formattedUrlString = [NSString stringWithFormat:@"http://%@", urlString];
+        }
+        NSURL *url = [NSURL URLWithString:formattedUrlString];
+        NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
+        [self.myWebView loadRequest:urlRequest];
+        [textField resignFirstResponder];
+        
+        return YES;
 
 }
 - (IBAction)comingSoon:(id)sender {
@@ -58,6 +97,7 @@
 {
     self.forwardButton.enabled = self.myWebView.canGoForward;
     self.backButton.enabled = self.myWebView.canGoBack;
+ 
 
 }
 
@@ -77,17 +117,7 @@
     self.myURLTextField.hidden = NO;
 }
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    NSString *urlString = textField.text;
-    NSURL *url = [NSURL URLWithString:urlString];
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
-    [self.myWebView loadRequest:urlRequest];
 
-    [textField resignFirstResponder];
-    return  YES;
-
-}
 
 
 @end
